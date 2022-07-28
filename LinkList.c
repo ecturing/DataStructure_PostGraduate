@@ -1,3 +1,13 @@
+/**
+ * @file LinkList.c
+ * @author ecturing (Ecturing@vip.qq.com)
+ * @brief 单链表
+ * @version 0.1
+ * @date 2022-07-28
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include <malloc.h>
 #include <termio.h>
@@ -6,8 +16,8 @@ typedef char Elemtype;
 
 typedef struct Node
 {
-    Elemtype data;
-    struct Node *next;
+    Elemtype data;//数据域
+    struct Node *next;//指针域
     /* data */
 } Node, *LinkList;
 
@@ -53,6 +63,27 @@ void CreateFromHead(LinkList L){
  * @param L 头指针
  */
 int CreateFromTail(LinkList L){
+    Node *New;//新节点
+    Node *tail=L;//指向尾部的指针
+    printf("请开始输入字符，以$结束");
+    int flag=1;//循环标识符
+    char c;//输入字符
+    while (flag)
+    {
+        scanf("%c",&c);
+        if (c!='$')
+        {
+            /* code */
+            New=(Node*)malloc(sizeof(Node));
+            New->data=c;
+            tail->next=New;
+            tail=tail->next;
+        }else{
+            flag=0;
+            tail->next=NULL;
+        }
+    }
+    
 }
 
 /**
@@ -192,12 +223,51 @@ void print(LinkList L){
     }
     printf("\n");
 }
-
+/**
+ * @brief 有序表合并
+ * 
+ * @param A 
+ * @param B 
+ * @return LinkList 
+ */
+LinkList MergeList(LinkList A,LinkList B){
+    Node *a,*b,*r;
+    LinkList New;
+    a=A->next;
+    b=B->next;
+    New=A;
+    New->next=NULL;
+    r=New;
+    while (a!=NULL&&b!=NULL){
+        /* code */
+        if (a->data<=b->data){
+            /* code */
+            r->next=a;
+            r=a;
+            a=a->next;
+        }else{
+            r->next=b;
+            r=b;
+            b=b->next;
+        }
+    }
+        if (a){
+            /* code */
+            r->next=a;
+        }
+        else{
+            r->next=b;
+        }
+        free(B);
+        return New;
+    }
 
 int main(){
+    /* 注意创建(CreateFrom)方法的调用 */
     Node *head;
     init(&head);
-    CreateFromHead(head);
+    // CreateFromHead(head);
+    CreateFromTail(head);
     print(head);
     Elemtype a= SearchByIndex(head,6);
     printf("搜索结果%c\n",a);
@@ -207,4 +277,16 @@ int main(){
     print(head);
     InsertList(head,6,'4');
     print(head);
+    printf("合并有序表");
+
+    /* part2顺序表的合并 
+    书上例子为(2,2,3),(1,3,3,4),合并成功
+    */
+    Node *two;
+    init(&two);
+    // CreateFromHead(two);
+    CreateFromTail(two);
+    Node *merge=MergeList(head,two);
+    printf("合并后链表为");
+    print(merge);
 }
