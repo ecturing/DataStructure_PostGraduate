@@ -230,7 +230,7 @@ void print(LinkList L){
  * @param B 
  * @return LinkList 
  */
-LinkList MergeList(LinkList A,LinkList B){
+Node* MergeList(LinkList A,LinkList B){
     Node *a,*b,*r;
     LinkList New;
     a=A->next;
