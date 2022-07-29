@@ -22,16 +22,16 @@ typedef struct
  * @return int 节点下标
  */
 int locate(SeqList *L,Elemtype e){
+     int index=L->last;
     while (1)
     {
         /* code */
-        int index=L->last;
         if(L->data[index--]==e){
             if (index==-1){
                 printf("无此值");
                 break;
             }else{
-                return L->last;
+                return index+1;
                 break;
             }
         }
@@ -147,12 +147,12 @@ void Create(SeqList *q){
  * @param q 顺序表
  */
 void print(SeqList *q){ 
-    print("打印顺序表(倒序)");
+    printf("打印顺序表(倒序)");
+    int index=q->last;
     while (1){
         /* code */
-        int index=q->last;
         printf("%c",q->data[index--]);
-        if (q->last==-1){
+        if (index==-1){
             /* code */
             break;
         }   
@@ -164,4 +164,5 @@ int main(){
     Init(&q);
     Create(q);
     print(q);
+    printf("下标为%d",locate(q,'d')) ;
 }
