@@ -92,10 +92,10 @@ int CreateFromTail(LinkList L){
  * @param index 节点号（从0开始）
  * @return Elemtype 节点值
  */
-Elemtype SearchByIndex(LinkList L, int index){
+void SearchByIndex(LinkList L, int index){
     if (index < 0){
         /* code */
-        return -1;
+        printf("输入不合法\n");
     }
     int status=0; //标识索引，标识当前遍历到第status个节点
     Node *result=L; //结果节点
@@ -109,7 +109,7 @@ Elemtype SearchByIndex(LinkList L, int index){
         return result->data;
     }
     else{
-        return -1;
+        printf("输入不合法");
     }
 }
 /**
@@ -119,7 +119,7 @@ Elemtype SearchByIndex(LinkList L, int index){
  * @param key 节点值
  * @return Node* 返回的节点元素
  */
-Node* SearchKey(LinkList L,Elemtype key){
+void SearchKey(LinkList L,Elemtype key){
     Node *result;
     result=L->next;
     while (result!=NULL)
@@ -130,9 +130,10 @@ Node* SearchKey(LinkList L,Elemtype key){
             result=result->next;
         }else{
             break;
-            return result;
+            printf("节点已经找到，数据为：%d",result->data);
         }
     }
+    printf("节点未能找到\n");
 }
 
 /**
@@ -264,25 +265,26 @@ Node* MergeList(LinkList A,LinkList B){
 
 int main(){
     /* 注意创建(CreateFrom)方法的调用 */
-    Node *head;
+    LinkList head;
     init(&head);
     // CreateFromHead(head);
     CreateFromTail(head);
     print(head);
-    Elemtype a= SearchByIndex(head,6);
-    printf("搜索结果%c\n",a);
-    Node *p=SearchKey(head,'4');
+    SearchByIndex(head,6);
+    SearchKey(head,'4');
     printf("链表长度:%d\n",ListLength(head));
     DeleteList(head,6);
+    printf("删除后：");
     print(head);
     InsertList(head,6,'4');
+    printf("插入后：");
     print(head);
     printf("合并有序表");
 
     /* part2顺序表的合并 
     书上例子为(2,2,3),(1,3,3,4),合并成功
     */
-    Node *two;
+    LinkList two;
     init(&two);
     // CreateFromHead(two);
     CreateFromTail(two);
