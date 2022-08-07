@@ -8,6 +8,27 @@
 - 编译器 :12.1.0 (GCC)
 - 实现语言: C
 
+## 推荐配置
+.vscode文件夹下配置文件做如下推荐，根据替换自动生成内容的部分参数，可获得更加整洁的目录结构
+
+launch.json
+
+```json
+"program": "${workspaceFolder}/out/${fileBasenameNoExtension}"
+```
+
+task.json
+
+```json
+"args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}/out/${fileBasenameNoExtension}"
+        ],
+```
+
 ## 任务列表
 
 ### 基本数据结构实现
