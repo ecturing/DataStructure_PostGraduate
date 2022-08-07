@@ -26,7 +26,7 @@ task.json
                 "${file}",
                 "-o",
                 "${workspaceFolder}/out/${fileBasenameNoExtension}"
-        ],
+        ]
 ```
 
 ## 任务列表
